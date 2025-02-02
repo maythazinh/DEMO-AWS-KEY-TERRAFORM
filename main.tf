@@ -20,8 +20,9 @@ resource "aws_key_pair" "this" {
 resource "local_file" "private_key" {
   content  = tls_private_key.ssh.private_key_openssh
   filename = "${path.root}/generated/${local.deployment_id}-key.pem"
+  file_permission = "0400"
 
-  provisioner "local-exec" {
-    command = "chmod 400 ${path.root}/generated/${local.deployment_id}-key.pem"
-  }
+  # provisioner "local-exec" {
+  #   command = "chmod 400 ${path.root}/generated/${local.deployment_id}-key.pem"
+  # }
 }
